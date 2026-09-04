@@ -1,0 +1,34 @@
+name: Update latest sermon
+on:
+  schedule:
+    - cron: '0 11 * * 1'   # Mondays 11:00 UTC (after Sunday uploads)
+  workflow_dispatch: {}
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch newest sermon from SoundCloud RSS
+        run: |
+          python3 - <<'PY'
+          import json, re, urllib.request
+          rss = urllib.request.urlopen('https://feeds.soundcloud.com/users/soundcloud:users:515156769/sounds.rss', timeout=60).read().decode('utf-8', 'ignore')
+          item = re.search(r'<item>(.*?)</item>', rss, re.S).group(1)
+          data = {
+            'title': re.search(r'<title>(.*?)</title>', item).group(1),
+            'link': re.search(r'<link>(.*?)</link>', item).group(1),
+            'date': re.search(r'<pubDate>(.*?)</pubDate>', item).group(1),
+          }
+          path = 'latest-sermon.json'
+          json.dump(data, open(path, 'w'), indent=1)
+          print(data)
+          PY
+      - name: Commit if changed
+        run: |
+          git config user.name 'sermon-bot'
+          git config user.email 'actions@github.com'
+          git add latest-sermon.json
+          git diff --cached --quiet || git commit -m 'Latest sermon: auto-update from SoundCloud'
+          git push
