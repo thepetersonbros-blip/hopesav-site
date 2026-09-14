@@ -199,7 +199,7 @@
       }
       var btn = form.querySelector('button[type="submit"]');
       var label = btn ? btn.textContent : '';
-      if (btn) { btn.disabled = true; btn.textContent = 'Sending\u2026'; }
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
       fd.append('access_key', FORM_ACCESS_KEY);
       fd.append('subject', subject);
       fd.append('from_name', 'Hope Bible Church website');
