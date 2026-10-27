@@ -296,6 +296,10 @@ body.nav-open .nav-toggle span:nth-child(3){transform:translateY(-8px) rotate(-4
 .team-card h3{margin:0 0 .15rem;font-size:1.45rem;}
 .team-card .team-role{font-size:.76rem;letter-spacing:.22em;text-transform:uppercase;color:var(--terra-deep);font-weight:700;margin:0 0 .4rem;}
 .team-card .team-mail{font-size:.9rem;word-break:break-all;}
+.team-card h3 a{color:inherit;text-decoration:none;}
+.team-card h3 a:hover{color:var(--terra-deep);}
+.team-card .team-bio-link{margin:.2rem 0 0;font-size:.92rem;}
+.team-card .team-bio-link a{color:var(--sea);font-weight:600;}
 
 /* elder editorial rows */
 .person-row{
@@ -303,6 +307,7 @@ body.nav-open .nav-toggle span:nth-child(3){transform:translateY(-8px) rotate(-4
   align-items:center;padding:clamp(2.6rem,5vw,4rem) 0;
 }
 .person-row + .person-row{border-top:1px solid var(--hairline);}
+.person-row[id]{scroll-margin-top:5.5rem;}
 .person-row .person-fig{grid-column:1 / span 5;}
 .person-row .person-bio{grid-column:6 / span 7;}
 .person-row.flip .person-fig{grid-column:8 / span 5;grid-row:1;}
