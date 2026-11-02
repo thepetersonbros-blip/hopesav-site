@@ -1,7 +1,7 @@
 name: Update latest sermon
 on:
   schedule:
-    - cron: '0 11 * * 1'   # Mondays 11:00 UTC (after Sunday uploads)
+    - cron: '0 12 * * *'   # every day 12:00 UTC, so late uploads show up within a day
   workflow_dispatch: {}
 permissions:
   contents: write
